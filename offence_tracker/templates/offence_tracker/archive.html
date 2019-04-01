@@ -1,0 +1,30 @@
+{% extends 'offence_tracker/base.html' %}
+{% block title %}Archive{% endblock %}
+{% block body %}
+<nav aria-label="...">
+  <ul class="pager">
+    <li><a href = {% url 'offence_tracker:archive_all' %}> View All</a> </li>
+<li><a href = "http://copdpsd.info.tm/archive/P/"> Primary</a> </li>
+<li><a href = "http://copdpsd.info.tm/archive/M/"> Middle</a> </li>
+<li><a href = "http://copdpsd.info.tm/archive/S/"> Senior</a> </li>
+  </ul>
+</nav>
+<div class = "container-fluid">
+<div class="list-group" >
+    {% for offence in offences %}
+         <div class="list-group-item">
+            <h2 class="list-group-item-heading">{{ offence.get_type_display }}</h2>
+            <p class="list-group-item-text">
+                <b>Date / Time:</b> {{ offence.date }} </br>
+                <b>Block:</b> {{ offence.get_block_display }}</br>
+                <b>Floor:</b> {{ offence.get_floor_display }}</br>
+                <b>Class :</b> {{ offence.grade }} - {{ offence.section }}</br>
+                <b>Period:</b> {{ offence.period }}</br>
+                <b>Reported by :</b> {{ offence.reporter }}</br>
+                <a href = "/delete_offence/{{ offence.id }}"> Remove </a></br>
+            </p>
+        </div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}
